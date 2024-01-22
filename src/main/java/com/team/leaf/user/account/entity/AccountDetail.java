@@ -12,6 +12,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "account_detail")
 public class AccountDetail {
 
     @Id
@@ -26,6 +27,10 @@ public class AccountDetail {
 
     private String nickname;
 
+    private String birthday;
+
+    private String birthyear;
+
     private String universityName;
 
     private String shippingAddress;
@@ -38,6 +43,9 @@ public class AccountDetail {
 
     private String phone;
 
+    @Enumerated(EnumType.STRING)
+    private AccountRole role;
+
     private LocalDate lastAccess;
 
     private int loginFailCount;
@@ -47,5 +55,18 @@ public class AccountDetail {
 
     @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<SearchHistory> searchHistories;
+
+    public AccountDetail update(String name, String birthday, String birthyear, String phone) {
+        this.name = name;
+        this.birthday = birthday;
+        this.birthyear = birthyear;
+        this.phone = phone;
+
+        return this;
+    }
+
+    public String getRoleKey() {
+        return this.role.getKey();
+    }
 
 }

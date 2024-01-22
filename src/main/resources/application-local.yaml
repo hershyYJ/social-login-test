@@ -4,7 +4,7 @@ spring:
       on-profile: local
 
   datasource:
-    url: jdbc:mysql://localhost:3306/leaf?useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    url: url
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: password
@@ -24,3 +24,22 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+
+  session:
+    jdbc:
+      initialize-schema: always
+
+  #social
+  security:
+    oauth2:
+      client:
+      registration:
+        google:
+          client-id: clientId
+          client-secret: clientSecret
+          scope:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+            - 'https://www.googleapis.com/auth/userinfo.profile'
+            - 'https://www.googleapis.com/auth/user.birthday.read'
+            - 'https://www.googleapis.com/auth/user.phonenumbers.read'
+
