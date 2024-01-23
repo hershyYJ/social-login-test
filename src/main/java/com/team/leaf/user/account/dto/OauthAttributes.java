@@ -29,8 +29,41 @@ public class OauthAttributes {
     }
 
     public static OauthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes){
-
+        if("kakao".equals(registrationId)){
+            return ofKakao("id", attributes);
+        }
+        if("naver".equals(registrationId)){
+            return ofNaver("id", attributes);
+        }
         return ofGoogle(userNameAttributeName, attributes);
+    }
+
+    private static OauthAttributes ofKakao(String userNameAttributeName, Map<String, Object> attributes) {
+        Map<String, Object> kakaoAccount = (Map<String, Object>)attributes.get("kakao_account");
+
+        return OauthAttributes.builder()
+                .name((String) kakaoAccount.get("name"))
+                .email((String) kakaoAccount.get("email"))
+                .birthday((String) kakaoAccount.get("birthday"))
+                .birthyear((String) kakaoAccount.get("birthyear"))
+                .phone((String) kakaoAccount.get("phone_number"))
+                .attributes(attributes)
+                .nameAttributeKey(userNameAttributeName)
+                .build();
+    }
+
+    private static OauthAttributes ofNaver(String userNameAttributeName, Map<String, Object> attributes) {
+        Map<String, Object> response = (Map<String, Object>)attributes.get("response");
+
+        return OauthAttributes.builder()
+                .name((String) response.get("name"))
+                .email((String) response.get("email"))
+                .birthday((String) response.get("birthday"))
+                .birthyear((String) response.get("birthyear"))
+                .phone((String) response.get("mobile"))
+                .attributes(response)
+                .nameAttributeKey(userNameAttributeName)
+                .build();
     }
 
     private static OauthAttributes ofGoogle(String userNameAttributeName, Map<String, Object> attributes) {
@@ -39,7 +72,7 @@ public class OauthAttributes {
                 .email((String) attributes.get("email"))
                 .birthday((String) attributes.get("birthday"))
                 .birthyear((String) attributes.get("birthyear"))
-                .phone((String) attributes.get("phone"))
+                .phone((String) attributes.get("phonenumbers"))
                 .attributes(attributes)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
