@@ -21,13 +21,13 @@ public class User {
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
+    @Column
     private String birthday;
 
-    @Column(nullable = false)
+    @Column
     private String birthyear;
 
-    @Column(nullable = false)
+    @Column
     private String phone;
 
 

@@ -70,9 +70,6 @@ public class OauthAttributes {
         return OauthAttributes.builder()
                 .name((String) attributes.get("name"))
                 .email((String) attributes.get("email"))
-                .birthday((String) attributes.get("birthday"))
-                .birthyear((String) attributes.get("birthyear"))
-                .phone((String) attributes.get("phonenumbers"))
                 .attributes(attributes)
                 .nameAttributeKey(userNameAttributeName)
                 .build();

@@ -7,6 +7,7 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 
+
 @Configuration
 public class OauthConfig {
 
@@ -31,13 +32,11 @@ public class OauthConfig {
             return ClientRegistration.withRegistrationId("google")
                     .clientId("client_id")
                     .clientSecret("client_secret")
-                    .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
-                    .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                    //.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                    //.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                     .redirectUri("http://localhost:8080/login/oauth2/code/google")
                     .scope("https://www.googleapis.com/auth/userinfo.email",
-                            "https://www.googleaprmsis.com/auth/userinfo.profile",
-                            "https://www.googleapis.com/auth/user.birthday.read",
-                            "https://www.googleapis.com/auth/user.phonenumbers.read")
+                            "https://www.googleaprmsis.com/auth/userinfo.profile")
                     .build();
         }
 
@@ -45,8 +44,8 @@ public class OauthConfig {
             return ClientRegistration.withRegistrationId("naver")
                     .clientId("client_id")
                     .clientSecret("client_secret")
-                    .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
-                    .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                    //.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                    //.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                     .redirectUri("http://localhost:8080/login/oauth2/code/naver")
                     .build();
         }
@@ -55,7 +54,7 @@ public class OauthConfig {
             return ClientRegistration.withRegistrationId("kakao")
                     .clientId("client_id")
                     .clientSecret("client_secret")
-                    .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                    //.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                     .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                     .redirectUri("http://localhost:8080/login/oauth2/code/kakao")
                     .build();

@@ -5,7 +5,6 @@ import com.team.leaf.user.account.dto.SessionUser;
 import com.team.leaf.user.account.entity.User;
 import com.team.leaf.user.account.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -20,10 +19,14 @@ import java.util.Collections;
 
 
 @Service
-@RequiredArgsConstructor
 public class OauthService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
     private final UserRepository userRepository;
     private final HttpSession httpSession;
+
+    public OauthService(UserRepository userRepository, HttpSession httpSession) {
+        this.userRepository = userRepository;
+        this.httpSession = httpSession;
+    }
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
@@ -42,6 +45,7 @@ public class OauthService implements OAuth2UserService<OAuth2UserRequest, OAuth2
                 attributes.getAttributes(),
                 attributes.getNameAttributeKey());
     }
+
 
     @Transactional
     public User saveOrUpdate(OauthAttributes attributes){
